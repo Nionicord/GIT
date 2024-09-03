@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Multilenguaje</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Texto blanco */
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: #333; /* Fondo gris oscuro para el formulario */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+        }
+        button {
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="form-title">Formulario de Contacto</h1>
+    <label for="language-select">Idioma / Language:</label>
+    <select id="language-select">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
+
+    <form id="contact-form">
+        <label for="name" id="name-label">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email" id="email-label">Mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message" id="message-label">Mensaje:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit" id="submit-button">Enviar</button>
+    </form>
+
+    <script>
+        const languageSelect = document.getElementById('language-select');
+        const formTitle = document.getElementById('form-title');
+        const nameLabel = document.getElementById('name-label');
+        const emailLabel = document.getElementById('email-label');
+        const messageLabel = document.getElementById('message-label');
+        const submitButton = document.getElementById('submit-button');
+        const contactForm = document.getElementById('contact-form');
+
+        // Objeto de traducciones para los textos del formulario
+        const translations = {
+            es: {
+                title: "Formulario de Contacto",
+                name: "Nombre:",
+                email: "Mail:",
+                message: "Mensaje:",
+                submit: "Enviar",
+                confirmation: "Mensaje enviado y guardado correctamente." // Mensaje de confirmación en español
+            },
+            en: {
+                title: "Contact Form",
+                name: "Name:",
+                email: "Email:",
+                message: "Message:",
+                submit: "Send",
+                confirmation: "Message sent and saved successfully." // Mensaje de confirmación en inglés
+            }
+        };
+
+        // Evento para cambiar los textos del formulario según el idioma seleccionado
+        languageSelect.addEventListener('change', () => {
+            const selectedLanguage = languageSelect.value;
+            formTitle.textContent = translations[selectedLanguage].title;
+            nameLabel.textContent = translations[selectedLanguage].name;
+            emailLabel.textContent = translations[selectedLanguage].email;
+            messageLabel.textContent = translations[selectedLanguage].message;
+            submitButton.textContent = translations[selectedLanguage].submit;
+        });
+
+        // Evento submit del formulario
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío real del formulario
+
+            // Recopilar los datos del formulario
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+            };
+
+            // Simular el almacenamiento de datos (ejemplo de consola)
+            console.log("Mensaje guardado:", formData);
+
+            // Mostrar mensaje de confirmación según el idioma seleccionado
+            const selectedLanguage = languageSelect.value;
+            alert(translations[selectedLanguage].confirmation); // Muestra el mensaje correspondiente al idioma
+
+            // Limpiar el formulario
+            contactForm.reset();
+        });
+    </script>
+
+</body>
+</html>
